@@ -8,6 +8,7 @@ export default function DummyPayment() {
   const { state } = useLocation();
   const navigate = useNavigate();
   const product = state?.product;
+  const discountedPrice = state?.discountedPrice;
 
   const [formData, setFormData] = useState({
     name: "",
@@ -72,9 +73,9 @@ export default function DummyPayment() {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/payment/create-order",
+        "http://localhost:3000/api/payment/create-order",
         {
-          amount: product.price * 10 * 100,
+          amount: discountedPrice,
           customerDetails: formData,
         },
         {
@@ -95,7 +96,7 @@ export default function DummyPayment() {
         handler: async function (response) {
           try {
             const verifyRes = await axios.post(
-              "http://localhost:5000/api/payment/verify",
+              "http://localhost:3000/api/payment/verify",
               {
                 razorpay_order_id: response.razorpay_order_id,
                 razorpay_payment_id: response.razorpay_payment_id,
@@ -109,13 +110,13 @@ export default function DummyPayment() {
 
             if (verifyRes.data.success) {
               await axios.post(
-                "http://localhost:5000/api/orders",
+                "http://localhost:3000/api/orders",
                 {
                   items: [
                     {
                       productId: product._id,
                       title: product.title,
-                      price: product.price,
+                      price: discountedPrice,
                       quantity: 1,
                       images: product.images,
                     },
@@ -217,7 +218,7 @@ export default function DummyPayment() {
           type="submit"
           className="w-full bg-green-600 text-white p-3 rounded hover:bg-green-700 transition"
         >
-          Pay ₹{product.price * 10}
+          Pay ₹{discountedPrice.toFixed(0)}
         </button>
       </form>
     </div>

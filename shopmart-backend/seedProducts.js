@@ -2,7 +2,7 @@
 import mongoose from "mongoose";
 import axios from "axios";
 import dotenv from "dotenv";
-import Product from "./models/Product.js"; // Ensure this path matches your folder structure
+import Product from "./models/Product.js"; 
 
 dotenv.config();
 
@@ -13,13 +13,12 @@ const seedProducts = async () => {
     await mongoose.connect(MONGO_URL);
     console.log(" MongoDB connected");
 
-    // Fetch data from external API
     const { data } = await axios.get("https://api.escuelajs.co/api/v1/products");
 
-    // Optional: Clear existing products
+
     await Product.deleteMany();
 
-    // Format data for your Product model
+ 
     const formattedProducts = data.map((item) => ({
       title: item.title,
       price: item.price,
@@ -28,7 +27,7 @@ const seedProducts = async () => {
       images: item.images || [],
     }));
 
-    // Insert into MongoDB
+
     await Product.insertMany(formattedProducts);
     console.log(" Products imported successfully!");
     process.exit();

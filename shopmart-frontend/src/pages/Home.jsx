@@ -40,20 +40,21 @@ export default function Home() {
     fetchAllProducts();
   }, []);
 
-  useEffect(() => {
-    if (location.state?.highlightProductId && products.length > 0) {
-      const productElement = document.getElementById(
-        `product-${location.state.highlightProductId}`
-      );
-      if (productElement) {
-        productElement.scrollIntoView({ behavior: "smooth", block: "center" });
-        productElement.classList.add("ring", "ring-blue-400");
-        setTimeout(() => {
-          productElement.classList.remove("ring", "ring-blue-400");
-        }, 1000);
-      }
-    }
-  }, [products, location.state]);
+  //the below code is for highlight and scroll to the product you are in before clicking the product to view i commented because its not working
+  // useEffect(() => {
+  //   if (location.state?.highlightProductId && products.length > 0) {
+  //     const productElement = document.getElementById(
+  //       `product-${location.state.highlightProductId}`
+  //     );
+  //     if (productElement) {
+  //       productElement.scrollIntoView({ behavior: "smooth", block: "center" });
+  //       productElement.classList.add("ring", "ring-blue-400");
+  //       setTimeout(() => {
+  //         productElement.classList.remove("ring", "ring-blue-400");
+  //       }, 1000);
+  //     }
+  //   }
+  // }, [products, location.state]);
 
   const addToCart = async (e, product) => {
     e.stopPropagation();
@@ -74,7 +75,7 @@ export default function Home() {
           title: product.title,
           price: product.price,
           images: product.images,
-          offer: product.offer, // Now including the offer field
+          offer: product.offer, 
           quantity: 1,
         },
         {

@@ -1,4 +1,3 @@
-// client/src/pages/ProductDetails.jsx
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "../api/axios";
@@ -23,7 +22,8 @@ export default function ProductDetails() {
   }
 
   const handleBuy = () => {
-    navigate("/payment", { state: { product, size: selectedSize } });
+    const discountedPrice = product.offer > 0 ? product.price * (1 - product.offer / 100) : product.price;
+    navigate("/payment", { state: { product, discountedPrice, size: selectedSize } });
   };
 
   if (!product) return <div className="p-8 text-gray-600">Loading...</div>;
@@ -63,11 +63,11 @@ export default function ProductDetails() {
           <div className="flex items-baseline space-x-2">
             {product.offer > 0 && (
               <p className="text-xl text-gray-400 line-through">
-                ₹{product.price * 10}
+                ₹{product.price}
               </p>
             )}
             <p className="text-2xl font-semibold text-green-600">
-              ₹{discountedPrice * 10}
+              ₹{discountedPrice}
             </p>
             {product.offer > 0 && (
               <span className="text-sm font-bold text-red-500">
