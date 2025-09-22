@@ -9,7 +9,7 @@ const Orders = () => {
 
   const fetchOrders = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/orders/myorders", {
+      const res = await axios.get("https://shopmart-5icm.onrender.com/api/orders/myorders", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
