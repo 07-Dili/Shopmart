@@ -3,6 +3,11 @@
 ## Description
 A full-stack e-commerce platform built with React and Node.js (Express) where users can browse products, add them to a cart, manage quantities, and apply discounts.
 
+PROJECT URL : https://shopmart-frontend-x63y.onrender.com/
+
+admin email:admin@gmail.com
+admin password:admin12345
+
 ## Features
 * User authentication (Login, Register)
 * Product Browse and detailed views
