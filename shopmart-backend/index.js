@@ -18,7 +18,16 @@ const app = express();
 connectDB();
 
 
-app.use(cors());
+const allowedOrigins = [
+  "http://localhost:5173",          
+  "https://your-frontend.onrender.com" 
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true,
+}));
+
 app.use(express.json());
 
 
