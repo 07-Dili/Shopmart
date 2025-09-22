@@ -20,7 +20,7 @@ connectDB();
 
 const allowedOrigins = [
   "http://localhost:5173",          
-  "https://your-frontend.onrender.com" 
+  "https://shopmart-frontend-x63y.onrender.com" 
 ];
 
 app.use(cors({
