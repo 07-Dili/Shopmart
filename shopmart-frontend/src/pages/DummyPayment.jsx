@@ -73,7 +73,7 @@ export default function DummyPayment() {
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/payment/create-order",
+        "https://shopmart-5icm.onrender.com/api/payment/create-order",
         {
           amount: discountedPrice,
           customerDetails: formData,
@@ -96,7 +96,7 @@ export default function DummyPayment() {
         handler: async function (response) {
           try {
             const verifyRes = await axios.post(
-              "http://localhost:3000/api/payment/verify",
+              "https://shopmart-5icm.onrender.com/api/payment/verify",
               {
                 razorpay_order_id: response.razorpay_order_id,
                 razorpay_payment_id: response.razorpay_payment_id,
@@ -110,7 +110,7 @@ export default function DummyPayment() {
 
             if (verifyRes.data.success) {
               await axios.post(
-                "http://localhost:3000/api/orders",
+                "https://shopmart-5icm.onrender.com/api/orders",
                 {
                   items: [
                     {
